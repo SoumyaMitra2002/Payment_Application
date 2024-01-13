@@ -15,7 +15,7 @@ body{
     margin-left: 160px;
     display: flex;
     flex-direction: column;
-    margin-top: -56px;
+    margin-top: -52px;
     
 }
 .card .insidebox .box{
@@ -87,8 +87,7 @@ body{
     margin-top: -1.2em;
     font-size: 1.5em;
     display: block;
-    
-    
+    transform: translate(0, 0) scale(1, 1);
 }
 .card .insidebox .box input[type="text"]+label:before,
 .card .insidebox .box input[type="email"]+label:before,
@@ -110,3 +109,44 @@ body{
     color: #287ae6;
     transform: translate(0,-1.5em) scale(0.9,0.9);
 }
+
+.popup{
+    transform: scale(0.5);
+    visibility: hidden;
+    transition: transform 0.4s ,top 0.4s;
+ }
+ .open-popup{
+     /* top:100px; */
+     visibility: visible;
+     transform: scale(1);
+ }
+ .popup .card{
+     height:415px;
+     width: 474px;
+     background-color: white;
+     margin-left: -1px;
+     margin-top: 323px;
+ }
+ .card .image img{
+     margin-top: -94px;
+     margin-left: 106px;
+ }
+ .card .content p{
+     font-family: 'Times New Roman', Times, serif;
+     font-size: 20px;
+     text-align: center;
+ }
+ .card .buttonf button{
+     height: 60px;
+     width: 406px;
+     color: black;
+     background-color: green;
+     font-family: 'Times New Roman', Times, serif;
+     font-size: 28px;
+     margin-top: 20px;
+     margin-left: 30px;
+     border: none;
+ }
+ .card .buttonf button:hover{
+     cursor: pointer;
+ }

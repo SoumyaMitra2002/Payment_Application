@@ -10,42 +10,141 @@
 
 <body>
     <div class="container">
-        <form action="#">
+        <form action="#" name="myForm" onsubmit="return validateForm()">
             <div class="card">
                 <ion-icon name="people-outline"></ion-icon>
-                <center><h1>Registration</h1></center>
+                <center>
+                    <h1>Registration</h1>
+                </center>
                 <div class="insidebox">
                     <div class="box">
-                        <input type="text">
+                        <input type="text" name="username">
                         <label placeholder="Username"></label>
                     </div>
-                    
+
                     <div class="box">
-                        <input type="email">   
+                        <input type="email" name="email">
                         <label placeholder="Email"></label>
                     </div>
                     <div class="box">
-                        <input type="password">
+                        <input type="password" name="password">
                         <label placeholder="Password"></label>
                     </div>
                     <div class="box">
-                        <input type="text">
+                        <input type="text" name="address">
                         <label placeholder="Address"></label>
-                        
+
                     </div>
                     <div class="box">
-                        <input type="text">
+                        <input type="text" name="aadhar">
                         <label placeholder="Aadhar No."></label>
                     </div>
                     <div class="button">
-                        <button type="submit">Submit</button>
+                        <button type="submit" onclick="openPopup()">Submit</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
+    <div class="popup" id="popup">
+        <div class="card">
+            <div class="image">
+                <img src="tick-sign-element-simple-vector-9271994-removebg-preview.png" alt="">
+            </div>
+            <div class="content">
+                <p>Your details has been successfully submitted.<br>Thanks!</p>
+            </div>
+            <div class="buttonf">
+                <button type="submit" onclick="closePopup()">Submit</button>
+            </div>
+        </div>
+    </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const inputs = document.querySelectorAll('.card .insidebox .box input');
+
+            inputs.forEach(function (input) {
+                const label = input.nextElementSibling;
+
+                // Initially check for existing value or placeholder
+                if (input.value.trim() !== '' || !input.placeholderShown) {
+                    label.classList.add('focused');
+                    label.style.transform = 'translate(0, -1.5em) scale(0.9, 0.9)';
+                }
+
+                input.addEventListener('input', function () {
+                    label.classList.add('focused');
+                });
+
+                input.addEventListener('focus', function () {
+                    label.classList.add('focused');
+                });
+
+                input.addEventListener('blur', function () {
+                    if (this.value === '' && input.placeholderShown) {
+                        label.classList.remove('focused');
+                        label.style.transform = 'translate(0, 0) scale(1, 1)';
+                    }
+                });
+
+                input.addEventListener('focusout', function () {
+                    if (this.value.trim() !== '' || !input.placeholderShown) {
+                        label.style.transform = 'translate(0, -1.5em) scale(0.9, 0.9)';
+                    }
+                });
+            });
+        });
+
+    </script>
+    <script>
+        function validateForm() {
+            var x = document.forms["myForm"]["username"].value;
+            var y = document.forms["myForm"]["email"].value;
+            var z = document.forms["myForm"]["password"].value;
+            var w = document.forms["myForm"]["address"].value;
+            var s = document.forms["myForm"]["aadhar"].value;
+            var aadhar = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
+            if (x == "" || y == "" || z == "" || w == "" || !aadhar.test(s) || s == "") {
+                alert("Please fill in all fields correctly");
+                return false;
+            }
+            return true;
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector('.container form');
+            const popup = document.getElementById("popup");
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                if (validateForm()) {
+                    showPopup();
+                }
+            });
+
+            function showPopup() {
+                popup.classList.add("open-popup");
+            }
+
+            function closePopup() {
+                popup.classList.remove("open-popup");
+            }
+
+            // Remove the transitionend event listener
+
+            // Function to handle closing the popup when the "Submit" button inside the popup is clicked
+            function submitButtonClicked() {
+                closePopup();
+            }
+
+            // Attach the event listener to the "Submit" button inside the popup
+            const submitButton = document.querySelector('.popup .buttonf button');
+            submitButton.addEventListener('click', submitButtonClicked);
+        });
+
+    </script>
 </body>
 
 </html>
