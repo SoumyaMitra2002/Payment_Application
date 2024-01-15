@@ -55,6 +55,11 @@ body{
               0 0 100px rgb(54, 84, 134);
 }
 
+.insidebox .button{
+    position: absolute;
+    margin-top: 280px;
+}
+
 .card .insidebox .box input[type="email"],
 .card .insidebox .box input[type="password"]{
     margin-top: 49px;
@@ -90,9 +95,10 @@ body{
     transform: translate(0,-1.5em) scale(0.9,0.9);
 }
 .ending{
+    position: absolute;
     text-align: center;
     color: black;
-    margin-top: -40px;
+    margin-top: 327px;
     font-family: 'Times New Roman', Times, serif;
     font-size: 26px;
 }
