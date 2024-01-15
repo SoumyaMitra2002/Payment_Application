@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
     <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
 </head>
+
 <body>
     <div class="main">
         <form action="" name="myForm" onsubmit="return validateForm()">
@@ -15,21 +19,21 @@
                 <div class="symbol">
                     <ion-icon name="person-outline"></ion-icon>
                 </div>
-                
+
                 <div class="heading">
                     <h1>Login</h1>
                 </div>
                 <div class="insidebox">
                     <div class="box">
-                        <input type="email" name="email">
+                        <input type="email" name="email" id="email">
                         <label placeholder="Email"></label>
                     </div>
                     <div class="box">
-                        <input type="password" name="password">
+                        <input type="password" name="password" id="password">
                         <label placeholder="Password"></label>
                     </div>
                     <div class="button">
-                        <button type="submit">Submit</button>
+                        <button type="button" onclick="login()">Submit</button>
                     </div>
                     <div class="ending">
                         <p>Don't have any account?<a href="register.html"><strong>Register</strong></a></p>
@@ -37,7 +41,6 @@
                 </div>
             </div>
         </form>
-        
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -74,8 +77,7 @@
                 });
             });
         });
-    </script>
-    <script>
+
         function validateForm() {
             var y = document.forms["myForm"]["email"].value;
             var z = document.forms["myForm"]["password"].value;
@@ -85,8 +87,67 @@
             }
             return true;
         }
+
+        function login() {
+            if (validateForm()) {
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                // Make a POST request
+                fetch('http://localhost:6700/api/v1/customers/validate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    }),
+                })
+                    .then(response => {
+                        if (response.status === 200) {
+                            // Successful login
+                            console.log(response.json());
+                            swal({
+                                title: "Success",
+                                text: "Successfully logged in",
+                                type: "success",
+                                confirmButtonText: "Cool"
+                            });
+                        } else if (response.status === 404) {
+                            // Incorrect username or password
+                            swal({
+                                title: "Error",
+                                text: "Invalid details",
+                                type: "warning",
+                                confirmButtonText: "OK"
+                            });
+                        } else {
+                            // Handle other status codes as needed
+                            swal({
+                                title: "Error",
+                                text: "An unexpected error occurred",
+                                type: "error",
+                                confirmButtonText: "OK"
+                            });
+                        }
+                    })
+
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Handle other errors as needed
+                        swal({
+                            title: "Error",
+                            text: "An unexpected error occurred",
+                            type: "error",
+                            confirmButtonText: "OK"
+                        });
+                    });
+            }
+        }
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>

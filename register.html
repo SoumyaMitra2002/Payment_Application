@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" href="style1.css">
+
+    <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
 </head>
 
 <body>
@@ -40,24 +43,11 @@
                         <label placeholder="Aadhar No."></label>
                     </div>
                     <div class="button">
-                        <button type="submit" onclick="openPopup()">Submit</button>
+                        <button type="submit">Submit</button>
                     </div>
                 </div>
             </div>
         </form>
-    </div>
-    <div class="popup" id="popup">
-        <div class="card">
-            <div class="image">
-                <img src="tick-sign-element-simple-vector-9271994-removebg-preview.png" alt="">
-            </div>
-            <div class="content">
-                <p>Your details has been successfully submitted.<br>Thanks!</p>
-            </div>
-            <div class="buttonf">
-                <button type="submit" onclick="closePopup()">Submit</button>
-            </div>
-        </div>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -112,6 +102,9 @@
             }
             return true;
         }
+
+    </script>
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
             const form = document.querySelector('.container form');
             const popup = document.getElementById("popup");
@@ -120,30 +113,66 @@
                 event.preventDefault();
 
                 if (validateForm()) {
-                    showPopup();
+                    // Get form data
+                    const formData = {
+                        username: form.username.value,
+                        email: form.email.value,
+                        password: form.password.value,
+                        aadharNo: form.aadhar.value
+                    };
+
+                    // Make a POST request
+                    fetch('http://localhost:6700/api/v1/customers', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData),
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                swal({
+                                    title: "Failed",
+                                    text: "Email or Aadhar is already present",
+                                    type: "error",
+                                    confirmButtonText: "Cool"
+                                });
+
+                            }
+                            else{
+                                showPopup();
+                            }
+                            return response.json();
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Success:', data);
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                            
+                        });
                 }
             });
 
+
             function showPopup() {
-                popup.classList.add("open-popup");
-            }
+            swal({
+                title: "Registered!",
+                text: "Details Saved successfully",
+                type: "success",
+                closeOnClickOutside: false
+            });
 
-            function closePopup() {
-                popup.classList.remove("open-popup");
-                window.location.href="login.html"
-            }
+            // Redirect to index.html after a short delay
+            setTimeout(function () {
+                window.location.href = "login.html";
+            }, 1500); // Adjust the delay as needed
+        }
 
-            // Remove the transitionend event listener
-
-            // Function to handle closing the popup when the "Submit" button inside the popup is clicked
-            function submitButtonClicked() {
-                closePopup();
-            }
-
-            // Attach the event listener to the "Submit" button inside the popup
-            const submitButton = document.querySelector('.popup .buttonf button');
-            submitButton.addEventListener('click', submitButtonClicked);
+            // ... (your existing functions for showing/closing the popup)
         });
+
     </script>
 </body>
 
