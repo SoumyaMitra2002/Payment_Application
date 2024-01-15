@@ -10,21 +10,22 @@
 </head>
 <body>
     <div class="main">
-        <form action="">
+        <form action="" name="myForm" onsubmit="return validateForm()">
             <div class="card">
-                <ul class="w3-ul">
-                    <li class="w3-xxxlarge"><i class="fa fa-male"></i></li>
-                </ul>
+                <div class="symbol">
+                    <ion-icon name="person-outline"></ion-icon>
+                </div>
+                
                 <div class="heading">
                     <h1>Login</h1>
                 </div>
                 <div class="insidebox">
                     <div class="box">
-                        <input type="email">
+                        <input type="email" name="email">
                         <label placeholder="Email"></label>
                     </div>
                     <div class="box">
-                        <input type="password">
+                        <input type="password" name="password">
                         <label placeholder="Password"></label>
                     </div>
                     <div class="button">
@@ -73,7 +74,19 @@
                 });
             });
         });
-
     </script>
+    <script>
+        function validateForm() {
+            var y = document.forms["myForm"]["email"].value;
+            var z = document.forms["myForm"]["password"].value;
+            if (y == "" || z == "") {
+                alert("Please fill in all fields correctly");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

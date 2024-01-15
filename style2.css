@@ -102,3 +102,11 @@ body{
     font-family: 'Times New Roman', Times, serif;
     font-size: 26px;
 }
+
+.symbol ion-icon{
+    height: 45px;
+    width: 90px;
+    margin-left: 213px;
+    margin-top: 10px;
+    margin-bottom: 18px;
+}
