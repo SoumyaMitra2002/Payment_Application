@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="main">
+        <div class="card">
+            <ul class="w3-ul">
+                <li class="w3-xxxlarge"><i class="fa fa-male"></i></li>
+            </ul>
+            <div class="heading">
+                <h1>Login</h1>
+            </div>
+            <div class="insidebox">
+                <div class="box">
+                    <input type="email">
+                    <label placeholder="Email"></label>
+                </div>
+                <div class="box">
+                    <input type="password">
+                    <label placeholder="Password"></label>
+                </div>
+                <div class="button">
+                    <button type="submit">Submit</button>
+                </div>
+                <div class="ending">
+                    <p>Don't have any account?<a href="register.html"><strong>Register</strong></a></p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const inputs = document.querySelectorAll('.card .insidebox .box input');
+
+            inputs.forEach(function (input) {
+                const label = input.nextElementSibling;
+
+                // Initially check for existing value or placeholder
+                if (input.value.trim() !== '' || !input.placeholderShown) {
+                    label.classList.add('focused');
+                    label.style.transform = 'translate(0, -1.5em) scale(0.9, 0.9)';
+                }
+
+                input.addEventListener('input', function () {
+                    label.classList.add('focused');
+                });
+
+                input.addEventListener('focus', function () {
+                    label.classList.add('focused');
+                });
+
+                input.addEventListener('blur', function () {
+                    if (this.value === '' && input.placeholderShown) {
+                        label.classList.remove('focused');
+                        label.style.transform = 'translate(0, 0) scale(1, 1)';
+                    }
+                });
+
+                input.addEventListener('focusout', function () {
+                    if (this.value.trim() !== '' || !input.placeholderShown) {
+                        label.style.transform = 'translate(0, -1.5em) scale(0.9, 0.9)';
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

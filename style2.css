@@ -1,0 +1,98 @@
+body{
+    background-image: url(Background.jpg);
+    background-repeat:no-repeat ;
+    background-size: auto;
+    background-size: 1700px 900px;
+    
+}
+.main .card{
+    background-color: white;
+    height: 560px;
+    width: 520px;
+    margin-left: 530px;
+    margin-top: 70px;
+    opacity: 0.8; 
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 5px 6px rgb(127, 199, 217);
+}
+.w3-ul .w3-xxxlarge{
+    margin-left: 226px;
+    margin-top: -10px;
+}
+.heading{
+    text-align: center;
+    color: black;
+    margin-top: -20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.insidebox{
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+}
+
+.insidebox button{
+    height: 41px;
+    width: 124px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    background-color: rgb(54, 84, 134);
+    transition: transform 0.2s;
+    letter-spacing: 5px;
+    overflow: hidden;
+    transition: .5s;
+    text-transform: uppercase;
+    border: none;
+    color: white;
+}
+.insidebox button:hover{
+    background: rgb(54, 84, 134);
+    cursor: pointer;
+    box-shadow: 0 0 5px rgb(54, 84, 134),
+              0 0 25px rgb(54, 84, 134),
+              0 0 50px rgb(54, 84, 134),
+              0 0 100px rgb(54, 84, 134);
+}
+
+.card .insidebox .box input[type="email"],
+.card .insidebox .box input[type="password"]{
+    margin-top: 49px;
+    width: 100%;
+    font-size: 1.5em;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+}
+.card .insidebox .box input[type="email"]+label,
+.card .insidebox .box input[type="password"]+label{
+    margin-top: -1.9em;
+    font-size: 1.5em;
+    display: block;
+    transform: translate(0, 0) scale(1, 1);
+    margin-left: -16px;
+}
+.card .insidebox .box input[type="email"]+label:before,
+.card .insidebox .box input[type="password"]+label:before{
+    content: attr(placeholder);
+    color: #287ae6;
+    display: inline-block;
+    transition: all .3s ease-in-out;
+}
+.card .insidebox .box input[type="email"]:focus,
+.card .insidebox .box input[type="password"]:focus{
+    border-color: #287ae6;
+}
+.card .insidebox .box input[type="email"]:focus+label,
+.card .insidebox .box input[type="password"]:focus+label{
+    font-size: 1.1em;
+    color: #287ae6;
+    transform: translate(0,-1.5em) scale(0.9,0.9);
+}
+.ending{
+    text-align: center;
+    color: black;
+    margin-top: -40px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 26px;
+}

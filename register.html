@@ -130,6 +130,7 @@
 
             function closePopup() {
                 popup.classList.remove("open-popup");
+                window.location.href="login.html"
             }
 
             // Remove the transitionend event listener
@@ -143,7 +144,6 @@
             const submitButton = document.querySelector('.popup .buttonf button');
             submitButton.addEventListener('click', submitButtonClicked);
         });
-
     </script>
 </body>
 
