@@ -107,13 +107,7 @@
                     .then(response => {
                         if (response.status === 200) {
                             // Successful login
-                            console.log(response.json());
-                            swal({
-                                title: "Success",
-                                text: "Successfully logged in",
-                                type: "success",
-                                confirmButtonText: "Cool"
-                            });
+                            return response.json();
                         } else if (response.status === 404) {
                             // Incorrect username or password
                             swal({
@@ -122,17 +116,26 @@
                                 type: "warning",
                                 confirmButtonText: "OK"
                             });
+                            throw new Error("Invalid details");
                         } else {
                             // Handle other status codes as needed
-                            swal({
-                                title: "Error",
-                                text: "An unexpected error occurred",
-                                type: "error",
-                                confirmButtonText: "OK"
-                            });
+                            throw new Error("An unexpected error occurred");
                         }
                     })
+                    .then(userData => {
+                        // Store user data in local storage
+                        localStorage.setItem('userData', JSON.stringify(userData));
 
+                        swal({
+                            title: "Success",
+                            text: "Successfully logged in",
+                            type: "success",
+                            confirmButtonText: "Cool"
+                        });
+                        setTimeout(function () {
+                            window.location.href = "dashboard.html";
+                        }, 1500);
+                    })
                     .catch(error => {
                         console.error('Error:', error);
                         // Handle other errors as needed
@@ -145,6 +148,7 @@
                     });
             }
         }
+
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

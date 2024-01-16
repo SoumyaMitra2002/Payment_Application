@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="bar">
+            <img src="fast-payment-digital-electronic-transaction-logo-symbol-icon_502259-844.avif" alt="">
+            <center>
+                <h1>Fast Pay</h1>
+            </center>
+            <ul class="dashlist">
+                <li><ion-icon name="wallet-outline"></ion-icon>&nbsp;&nbsp;My Wallet</li>
+                <li><ion-icon name="cash-outline"></ion-icon>&nbsp;&nbsp;Transaction</li>
+                <li><ion-icon name="send-outline"></ion-icon>&nbsp;&nbsp;Send</li>
+                <li><ion-icon name="receipt-outline"></ion-icon>&nbsp;&nbsp;Bill</li>
+                <li><ion-icon name="person-circle-outline"></ion-icon>&nbsp;&nbsp;Profile</li>
+                <li><ion-icon name="settings-outline"></ion-icon>&nbsp;&nbsp;Setting</li>
+            </ul>
+            <center>
+                <h3><ion-icon name="log-out-outline">&nbsp;&nbsp;</ion-icon>&nbsp;&nbsp;Log out</h3>
+            </center>
+        </div>
+        <div class="box">
+            <div class="insidebox">
+                <div class="dash">
+                    <h1>Dashboard</h1>
+                    <input type="text" placeholder="Search">
+                </div>
+                <div class="search">
+                </div>
+                <div class="box1">
+                    <div class="subbox1">
+                        <p id="userEmail"></p>
+                            <p id="username"></p>
+                            <p id="aadhar"></p>
+                    </div>
+                    <div class="innerbox">
+                        <div class="innerbox1">
+                            <!-- Display user email here -->
+                            
+                        </div>
+                        <div class="innerbox2">
+                            <h1>innerbox</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="box2">
+                    <h1>Balance</h1>
+                    
+                </div>
+            </div>
+            <div class="smallbox">
+                <div class="boxpro1">
+                    <h1>Current</h1>
+                    
+                </div>
+                <div class="boxpro2">
+                    <h1>Current</h1>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve user data from local storage
+            const userDataString = localStorage.getItem('userData');
+
+            if (userDataString) {
+                const userData = JSON.parse(userDataString);
+                console.log('User Data:', userData);
+
+                // Access user details and update the HTML content
+                const userEmailElement = document.getElementById('userEmail');
+                const usernameElement = document.getElementById('username');
+                const aadhar = document.getElementById('aadhar');
+                if (userEmailElement) {
+                    userEmailElement.textContent = `User Email: ${userData.email}`;
+                }
+                if (usernameElement) {
+                    usernameElement.textContent = `User Username: ${userData.username}`;
+                }
+                if (aadhar) {
+                    aadhar.textContent = `User Aadhar No.: ${userData.aadharNo}`;
+                }
+            } else {
+                // Handle the case when user data is not found in local storage
+                console.error('User data not found');
+                // You might want to redirect the user to the login page or handle the situation accordingly
+            }
+        });
+    </script>
+</body>
+</html>
